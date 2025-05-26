@@ -1,0 +1,32 @@
+﻿@using Practical_7.Models;
+@model List<Publication>
+
+@{
+    ViewBag.Title = "Publication Info";
+}
+<!-- Dnamically displays the data in the data repository for ease of use -->
+<div class="container mt-4">
+    <h2 class="text-center mb-4">Publication Info</h2>
+
+    <div class="row">
+        @foreach (var pub in Model)
+        {
+            <div class="col-md-4 mb-4">
+                <div class="card border-dark shadow-sm">
+                    <img src="@pub.LeadingImage" class="card-img-top img-fluid" alt="@pub.Title">
+                    <div class="card-body">
+                        <h4 class="card-title">@pub.Title</h4>
+                        <h5 class="card-subtitle text-muted">@pub.Author.Name</h5>
+                        <p class="card-text">@pub.Summary</p>
+                        <a href="@pub.MainStoryURL" class="btn btn-primary mt-2" target="_blank">Read More</a>
+                        <p class="mt-2"><strong>Publication Date:</strong> @pub.PublicationDate.ToString("dd MMM yyyy")</p>
+                        <p><strong>Type:</strong> @(pub is Article ? "Article" : "Book")</p>
+                        <p><strong>Edition:</strong> @(pub is Book ? ((Book)pub).EditionCount.ToString() : "-")</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
